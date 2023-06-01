@@ -34,3 +34,4 @@ public interface Booking
   public void setTime(Time t) ;
   public void setTable(Table t) ;
 }
+
