@@ -6,7 +6,7 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.domain ;
+package application.domain ;
 
 import java.sql.Date ;
 import java.sql.Time ;
@@ -17,15 +17,19 @@ public abstract class BookingImp implements Booking
   protected Date  date ;
   protected Time  time ;
   protected Table table ;
+  protected Menu menu ;
+  protected Time editTime;
+  protected int editCovers;
   
-  public BookingImp(int c, Date d, Time t, Table tab) {
+  public BookingImp(int c, Date d, Time t, Table tab, Menu m) {
     covers    = c ;
     date      = d ;
-    time = t ;
+    time 	  = t ;
     table     = tab ;
+    menu	  = m ;
   }
 
-  public Time getArrivalTime() {
+public Time getArrivalTime() {
     return null ;
   }
 
@@ -57,6 +61,24 @@ public abstract class BookingImp implements Booking
     return table.getNumber() ;
   }
   
+  public Menu getMenu() {
+    return menu;
+  }
+
+  public String getMenuName() {
+    return menu.getMName();
+  }
+
+  
+  public Time getEditTime() {
+	    return editTime;
+	  }
+  public int   getEditCovers() {
+	  return editCovers;
+	  
+  }
+   
+  
   public void setArrivalTime(Time t) { }
 
   public void setCovers(int c) {
@@ -73,5 +95,15 @@ public abstract class BookingImp implements Booking
   
   public void setTable(Table t) {
     table = t ;
+  }
+  
+  public void setMenu(Menu m) {
+	  menu = m;
+  }
+  public void setEditTime(Time t) {
+	  time = t ;
+  }
+  public void setEditCovers(int c) {
+	  covers = c;
   }
 }
