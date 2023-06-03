@@ -6,7 +6,7 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.domain ;
+package application.domain ;
 
 import java.sql.Date ;
 import java.sql.Time ;
@@ -37,7 +37,7 @@ public class BookingSystem
     return uniqueInstance ;
   }
 
-  private BookingSystem()
+  public BookingSystem()
   {
     today = new Date(Calendar.getInstance().getTimeInMillis()) ;
     restaurant = new Restaurant() ;
@@ -54,9 +54,9 @@ public class BookingSystem
   
   public void notifyObservers()
   {
-    Enumeration enum = observers.elements() ;
-    while (enum.hasMoreElements()) {
-      BookingObserver bo = (BookingObserver) enum.nextElement() ;
+    Enumeration enums = observers.elements() ;
+    while (enums.hasMoreElements()) {
+      BookingObserver bo = (BookingObserver) enums.nextElement() ;
       bo.update() ;
     }
   }
@@ -78,20 +78,20 @@ public class BookingSystem
   }
   
   public void makeReservation(int covers, Date date, Time time, int tno,
-			      String name, String phone)
+			      String mname, String name, String phone)
   {
     if (!doubleBooked(time, tno, null) && !overflow(tno, covers)) {
       Booking b
-	= restaurant.makeReservation(covers, date, time, tno, name, phone) ;
+	    = restaurant.makeReservation(covers, date, time, tno, mname, name, phone) ; // data o/x null error
       currentBookings.addElement(b) ;
       notifyObservers() ;
     }
   }
  
-  public void makeWalkIn(int covers, Date date, Time time, int tno)
+  public void makeWalkIn(int covers, Date date, Time time, int tno, String mname )
   {
     if (!doubleBooked(time, tno, null) && !overflow(tno, covers)) {
-      Booking b = restaurant.makeWalkIn(covers, date, time, tno) ;
+      Booking b = restaurant.makeWalkIn(covers, date, time, tno, mname) ;
       currentBookings.addElement(b) ;
       notifyObservers() ;
     }
@@ -100,14 +100,14 @@ public class BookingSystem
   public void selectBooking(int tno, Time time)
   {
     selectedBooking = null ;
-    Enumeration enum = currentBookings.elements() ;
-    while (enum.hasMoreElements()) {
-      Booking b = (Booking) enum.nextElement() ;
+    Enumeration enums = currentBookings.elements() ;
+    while (enums.hasMoreElements()) {
+      Booking b = (Booking) enums.nextElement() ;
       if (b.getTableNumber() == tno) {
-	if (b.getTime().before(time)
-	    && b.getEndTime().after(time)) {
-	  selectedBooking = b ;
-	}
+	    if (b.getTime().before(time)
+	        && b.getEndTime().after(time)) {
+	        selectedBooking = b ;
+	    }
       }
     }
     notifyObservers() ;
@@ -160,9 +160,9 @@ public class BookingSystem
     Time endTime = (Time) startTime.clone() ;
     endTime.setHours(endTime.getHours() + 2) ;
     
-    Enumeration enum = currentBookings.elements() ;
-    while (!doubleBooked && enum.hasMoreElements()) {
-      Booking b = (Booking) enum.nextElement() ;
+    Enumeration enums = currentBookings.elements() ;
+    while (!doubleBooked && enums.hasMoreElements()) {
+      Booking b = (Booking) enums.nextElement() ;
       if (b != ignore && b.getTableNumber() == tno
 	  && startTime.before(b.getEndTime())
 	  && endTime.after(b.getTime())) {
@@ -205,5 +205,21 @@ public class BookingSystem
   public static Vector getTableNumbers()
   {
     return Restaurant.getTableNumbers() ;
+  }
+  
+  public static Vector getMenuName()
+  {
+    return Restaurant.getMenuName();
+  }
+  
+  
+  //gui에서 사용하는 예약 수정 부분
+  public void editReservation(Time editTime, int editCovers) {
+	  if (!doubleBooked(editTime, selectedBooking.getTableNumber(), null) && !overflow(selectedBooking.getTableNumber(), editCovers)
+			  && selectedBooking != null ) {
+	    restaurant.editReservation(selectedBooking, editTime,editCovers);
+	    
+	      notifyObservers() ;
+	    }
   }
 }
