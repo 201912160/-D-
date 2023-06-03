@@ -6,9 +6,9 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.persistency ;
+package application.persistency ;
 
-import booksys.storage.Database ;
+import storage.Database ;
 
 import java.sql.* ;
 import java.util.Enumeration ;
@@ -30,9 +30,9 @@ public class TableMapper
   private PersistentTable getFromCacheByNumber(int tno)
   {
     PersistentTable t = null ;
-    Enumeration enum = cache.elements() ;
-    while (t == null & enum.hasMoreElements()) {
-      PersistentTable tmp = (PersistentTable) enum.nextElement() ;
+    Enumeration enums = cache.elements() ;
+    while (t == null & enums.hasMoreElements()) {
+      PersistentTable tmp = (PersistentTable) enums.nextElement() ;
       if (tmp.getNumber() == tno) {
 	t = tmp ;
       }
@@ -71,7 +71,7 @@ public class TableMapper
     if (t == null) {
       t = getTable("SELECT * FROM `Table` WHERE number='" + tno + "'") ;
       if (t != null) {
-	addToCache(t) ;
+    	  addToCache(t) ;
       }
     }
     return t ;
@@ -83,7 +83,7 @@ public class TableMapper
     if (t == null) {
       t = getTable("SELECT * FROM `Table` WHERE oid ='" + oid + "'") ;
       if (t != null) {
-	addToCache(t) ;
+    	  addToCache(t) ;
       }
     }
     return t ;
