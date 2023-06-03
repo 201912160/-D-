@@ -14,11 +14,13 @@ import java.sql.Date ;
 import java.sql.Time ;
 import java.util.Vector ;
 
-class Restaurant
+
+public class Restaurant
 {
   BookingMapper  bm = BookingMapper.getInstance() ;
   CustomerMapper cm = CustomerMapper.getInstance() ;
   TableMapper    tm = TableMapper.getInstance() ;
+  MenuMapper	 mm = MenuMapper.getInstance() ;
   
   Vector getBookings(Date date)
   {
@@ -39,21 +41,33 @@ class Restaurant
   {
     return TableMapper.getInstance().getTableNumbers() ;
   }
+  
+  //
+  Menu getMenu(String mname)
+  {
+    return mm.getMenu(mname) ; // data o null error
+  }
+
+  static Vector getMenuName()
+  {
+    return MenuMapper.getInstance().getMenuName() ;
+  }
 
   public Booking makeReservation(int covers, Date date,
-				     Time time,
-				     int tno, String name, String phone)
+				     Time time, int tno, String mname , String name, String phone)
   {
     Table t = getTable(tno) ;
+    Menu m = getMenu(mname) ; // data o null error
     Customer c = getCustomer(name, phone) ;
-    return bm.createReservation(covers, date, time, t, c, null) ;
+    return bm.createReservation(covers, date, time, t, m, c, null) ; // data x null error
   }
 
   public Booking makeWalkIn(int covers, Date date,
-			   Time time, int tno)
+			   Time time, int tno, String mname)
   {
     Table t = getTable(tno) ;
-    return bm.createWalkIn(covers, date, time, t) ;
+    Menu m = getMenu(mname) ;
+    return bm.createWalkIn(covers, date, time, t, m) ;
   }
 
   public void updateBooking(Booking b)
@@ -63,5 +77,10 @@ class Restaurant
   
   public void removeBooking(Booking b) {
     bm.deleteBooking(b) ;
+  }
+  //gui에서 사용하는 예약 수정 부분
+  public void editReservation(Booking b , Time editTime, int editCovers) {
+//	   bm.editReservation(b, editTime,editCovers);
+	 	  
   }
 }
