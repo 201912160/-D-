@@ -63,6 +63,9 @@ class ReservationDialog extends BookingDialog
     add(tableNumberLabel) ;
     add(tableNumber) ;
     
+    add(menuNameLabel) ;
+    add(menuName) ;
+    
     add(ok) ;
     add(cancel) ;
     
@@ -78,4 +81,13 @@ class ReservationDialog extends BookingDialog
   {
     return phone.getText() ;
   }
+
+ String getMenuName() {
+	
+	return null;
+}
+
+public int getMenuPrice() {
+	return 0;
+}
 }
