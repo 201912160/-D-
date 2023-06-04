@@ -6,17 +6,19 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.domain ;
+package application.domain ;
 
 public class Customer
 {
   private String name ;
   private String phoneNumber ;
+  private int point ;
 
-  public Customer(String n, String p)
+  public Customer(String n, String p, int pt)
   {
     name = n ;
     phoneNumber = p ;
+    point = pt ;
   }
 
   public String getName()
@@ -28,4 +30,10 @@ public class Customer
   {
     return phoneNumber ;
   }
+  
+  public int getPoint()
+  {
+    return point ;
+  }
+  
 }

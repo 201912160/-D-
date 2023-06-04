@@ -6,21 +6,19 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.persistency ;
+package application.persistency;
 
-import booksys.application.domain.Customer;
+import application.domain.Customer;
 
-class PersistentCustomer extends Customer
-{
-  private int oid ;
+class PersistentCustomer extends Customer {
+	private int oid;
 
-  PersistentCustomer(int id, String n, String p)
-  {
-    super(n, p) ;
-    oid = id ;
-  }
+	PersistentCustomer(int id, String n, String p, int pt) {
+		super(n, p, pt);
+		oid = id;
+	}
 
-  int getId() {
-    return oid ;
-  }
+	int getId() {
+		return oid;
+	}
 }

@@ -6,16 +6,16 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.domain ;
+package application.domain ;
 
 import java.sql.Date ;
 import java.sql.Time ;
 
 public class WalkIn extends BookingImp
 {
-  public WalkIn(int c, Date d, Time t, Table tab)
+  public WalkIn(int c, Date d, Time t, Table tab, Menu menu)
   {
-    super(c, d, t, tab) ;
+    super(c, d, t, tab, menu) ;
   }
 
   public String getDetails() {

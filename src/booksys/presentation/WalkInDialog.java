@@ -6,9 +6,9 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.presentation ;
+package presentation ;
 
-import booksys.application.domain.WalkIn ;
+import application.domain.WalkIn ;
 
 import java.awt.* ;
 
@@ -42,4 +42,11 @@ class WalkInDialog extends BookingDialog
 
     pack() ;
   }
+
+public int getMenuPrice() {
+	// TODO Auto-generated method stub
+	return 0;
 }
+
+}
+

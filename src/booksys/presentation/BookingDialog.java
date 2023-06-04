@@ -6,10 +6,10 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.presentation ;
+package presentation ;
 
-import booksys.application.domain.Booking ;
-import booksys.application.domain.BookingSystem ;
+import application.domain.Booking ;
+import application.domain.BookingSystem ;
 
 import java.awt.* ;
 import java.awt.event.* ;
@@ -21,9 +21,11 @@ import java.util.Enumeration ;
 abstract class BookingDialog extends Dialog
 {
   protected Choice    tableNumber ;
+  protected Choice    menuName ;
   protected TextField covers ;
   protected TextField time ;
   protected Label     tableNumberLabel ;
+  protected Label     menuNameLabel ;
   protected Label     coversLabel ;
   protected Label     timeLabel ;
   protected boolean   confirmed ;
@@ -51,12 +53,22 @@ abstract class BookingDialog extends Dialog
     
     tableNumberLabel = new Label("Table number:", Label.RIGHT) ;
     tableNumber = new Choice() ;
-    Enumeration enum = BookingSystem.getTableNumbers().elements() ;
-    while (enum.hasMoreElements()) {
-      tableNumber.add(((Integer) enum.nextElement()).toString()) ;
+    Enumeration enums = BookingSystem.getTableNumbers().elements() ;
+    while (enums.hasMoreElements()) {
+      tableNumber.add(((Integer) enums.nextElement()).toString()) ;
     }
     if (booking != null) {
       tableNumber.select(Integer.toString(booking.getTable().getNumber())) ;
+    }
+    
+    menuNameLabel = new Label("Menu Name:", Label.RIGHT) ;
+    menuName = new Choice() ;
+    Enumeration enums1 = BookingSystem.getMenuName().elements() ;
+    while (enums1.hasMoreElements()) {
+    	menuName.add(((String) enums1.nextElement())) ;
+    }
+    if (booking != null) {
+    	menuName.select(booking.getMenu().getMName()) ;
     }
 
     coversLabel = new Label("Covers:", Label.RIGHT) ;
@@ -92,7 +104,12 @@ abstract class BookingDialog extends Dialog
   {
     return Integer.parseInt(tableNumber.getSelectedItem()) ;
   }
-
+  
+  String getMenuName()
+  {
+    return menuName.getSelectedItem() ;
+  }
+  
   int getCovers()
   {
     return Integer.parseInt(covers.getText()) ;

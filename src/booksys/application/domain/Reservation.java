@@ -6,7 +6,7 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.domain ;
+package application.domain ;
 
 import java.sql.Date ;
 import java.sql.Time ;
@@ -16,9 +16,9 @@ public class Reservation extends BookingImp
   private Customer customer ;
   private Time     arrivalTime ;
   
-  public Reservation(int c, Date d, Time t, Table tab, Customer cust, Time arr)
+  public Reservation(int c, Date d, Time t, Table tab, Menu menu, Customer cust, Time arr) 
   {
-    super(c, d, t, tab) ;
+    super(c, d, t, tab, menu) ;
     customer    = cust ;
     arrivalTime = arr ;
   }
@@ -36,6 +36,7 @@ public class Reservation extends BookingImp
     StringBuffer details = new StringBuffer(64) ;
     details.append(customer.getName()) ;
     details.append(" ") ;
+    details.append(customer.getPhoneNumber()) ;
     details.append(customer.getPhoneNumber()) ;
     details.append(" (") ;
     details.append(covers) ;
@@ -55,4 +56,5 @@ public class Reservation extends BookingImp
   public void setCustomer(Customer c) {
     customer = c ;
   }
+
 }

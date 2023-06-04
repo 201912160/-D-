@@ -6,9 +6,9 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.presentation ;
+package presentation ;
 
-import booksys.application.domain.* ;
+import application.domain.* ;
 
 import java.awt.* ;
 import java.awt.event.* ;
@@ -203,10 +203,11 @@ public class StaffUI extends Canvas implements BookingObserver
 			      "Enter reservation details") ;
     d.show() ;
     if (d.isConfirmed()) {
-      bs.makeReservation(d.getCovers(),
+      bs.makeReservation(d.getCovers(), // data o/x null error
 			 bs.getCurrentDate(),
 			 d.getTime(),
 			 d.getTableNumber(),
+			 d.getMenuName(),
 			 d.getCustomerName(),
 			 d.getPhoneNumber()) ;
     }
@@ -222,7 +223,8 @@ public class StaffUI extends Canvas implements BookingObserver
       bs.makeWalkIn(d.getCovers(),
 		    bs.getCurrentDate(),
 		    d.getTime(),
-		    d.getTableNumber()) ;
+		    d.getTableNumber(),
+		    d.getMenuName() );
     }
   }
   
