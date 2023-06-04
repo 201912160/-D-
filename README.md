@@ -59,3 +59,18 @@
 주중에 각자 맡은 스프린트 목표 달성
 
 ### (7)	활용방안 및 기대효과
+
+1. 가시성 높은 웹페이지 UI를 통해 편리한 사용 가능
+2. 관리자 기능을 통해 예약 기능을 통합하여 간편성 증가
+3. 메뉴 예약 데이터 통계를 통한 데이터 분석 가능
+
+### (8) 실행방법
+
+1. Eclipse IDE for Enterprise Java and Web Developers 설치
+2. File → New → Other → Web → Dynamic Web Project 
+3. Target runtime → New Runtime → Apache → Apache Tomcat v9.0
+4. 이후 만들어진 프로젝트에 코드 붙여넣기
+5. Window → Show view → Servers
+6. No server are… → Apache → Tomcat v9.0 server
+7. 생성된 서버에 우클릭 → Add and Remove → 프로젝트 Add
+8. JSP 파일에서 Ctrl+F11
