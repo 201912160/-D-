@@ -63,3 +63,9 @@ INSERT INTO Menu (menuName, menuPrice) VALUES ('Rose pasta', 12000) ;
 INSERT INTO Menu (menuName, menuPrice) VALUES ('Gorgonzola pizza', 15000) ;
 INSERT INTO Menu (menuName, menuPrice) VALUES ('Bulgogi pizza', 16000) ;
 INSERT INTO Menu (menuName, menuPrice) VALUES ('Pepperoni pizza', 17000) ;
+
+ALTER DATABASE booksys DEFAULT CHARACTER SET utf8;
+ALTER TABLE Reservation  CONVERT TO CHARACTER SET utf8;
+ALTER TABLE WalkIn   CONVERT TO CHARACTER SET utf8;
+ALTER TABLE Menu   CONVERT TO CHARACTER SET utf8;
+ALTER TABLE Customer   CONVERT TO CHARACTER SET utf8;
